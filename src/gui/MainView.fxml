@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="578.0" maxWidth="601.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="578.0" maxWidth="601.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ControllerMainView">
    <content>
       <VBox prefHeight="573.0" prefWidth="597.0">
          <children>
@@ -34,17 +34,17 @@
                         <Insets left="8.0" />
                      </padding>
                   </Label>
-                  <Button layoutX="499.0" layoutY="69.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" text="Click">
+                  <Button fx:id="btClick" layoutX="499.0" layoutY="69.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" text="Click">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="14.0" layoutY="69.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" text="Salvar">
+                  <Button fx:id="btSave" layoutX="14.0" layoutY="69.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" text="Salvar">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="132.0" layoutY="69.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" text="Cacular">
+                  <Button fx:id="btCalc" layoutX="132.0" layoutY="69.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" text="Cacular">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -73,7 +73,7 @@
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <ComboBox prefHeight="31.0" prefWidth="214.0" promptText="Selecione o Usuário" GridPane.columnIndex="1" />
+                  <ComboBox fx:id="comboBoxPerson" prefHeight="31.0" prefWidth="214.0" promptText="Selecione o Usuário" GridPane.columnIndex="1" />
                   <Label text="Peso" GridPane.rowIndex="1">
                      <font>
                         <Font size="18.0" />
@@ -98,9 +98,9 @@
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="txtWeight" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtHeight" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="txtBmi" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label prefHeight="17.0" prefWidth="199.0" text="Label" textFill="#f50707" GridPane.columnIndex="2">
                      <padding>
                         <Insets left="30.0" />
@@ -125,14 +125,14 @@
             </GridPane>
             <TableView prefHeight="331.0" prefWidth="597.0">
               <columns>
-                <TableColumn prefWidth="66.0" text="Id" />
-                <TableColumn prefWidth="141.0" text="Nome" />
-                  <TableColumn prefWidth="46.0" text="Idade" />
-                  <TableColumn prefWidth="65.0" text="Peso" />
-                  <TableColumn prefWidth="62.0" text="Altura" />
-                  <TableColumn prefWidth="62.0" text="ICM" />
-                  <TableColumn prefWidth="62.0" text="Data" />
-                  <TableColumn prefWidth="85.0" />
+                <TableColumn prefWidth="50.0" text="Id" />
+                <TableColumn prefWidth="146.0" text="Nome" />
+                  <TableColumn prefWidth="50.0" text="Idade" />
+                  <TableColumn prefWidth="50.0" text="Peso" />
+                  <TableColumn prefWidth="50.0" text="Altura" />
+                  <TableColumn prefWidth="50.0" text="ICM" />
+                  <TableColumn prefWidth="114.0" text="Data" />
+                  <TableColumn prefWidth="59.0" />
               </columns>
             </TableView>
          </children>
