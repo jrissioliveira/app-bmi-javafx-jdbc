@@ -33,7 +33,7 @@ public class BmiService {
 			result = "Obesidade 3";
 		}
 		
-		person.addBmi(new Bmi(null, new Date(), bmiValue, result));
+		person.addBmi(new Bmi(null, new Date(), bmiValue, result, person));
 	}
 	
 }

@@ -26,6 +26,10 @@ public class Person implements Serializable {
 		this.height = height;
 		this.birthDate = birthDate;
 	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;

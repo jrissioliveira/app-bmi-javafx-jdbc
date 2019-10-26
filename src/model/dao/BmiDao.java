@@ -11,6 +11,6 @@ public interface BmiDao {
 	void update(Bmi obj);
 	void delete(Bmi obj);
 	List<Bmi> findAll();
-	List<Bmi> findByPerson(Person obj);
+	List<Bmi> findByPerson(Person ps);
 	
 }

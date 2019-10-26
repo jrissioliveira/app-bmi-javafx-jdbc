@@ -11,14 +11,17 @@ public class Bmi implements Serializable {
 	private Double bmiValue;
 	private String result;
 	
+	private Person person;
+	
 	public Bmi() {
 	}
 
-	public Bmi(Integer id, Date date, Double bmiValue, String result) {
+	public Bmi(Integer id, Date date, Double bmiValue, String result, Person person) {
 		this.id = id;
 		this.date = date;
 		this.bmiValue = bmiValue;
 		this.result = result;
+		this.person = person;
 	}
 
 	public Integer getId() {
@@ -51,6 +54,14 @@ public class Bmi implements Serializable {
 
 	public void setResult(String result) {
 		this.result = result;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 
 	@Override
