@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox prefHeight="443.0" prefWidth="559.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+<VBox prefHeight="443.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PersonListController">
    <children>
       <Label text="Cadastro de Usuários">
          <font>
@@ -22,16 +21,16 @@
       </Label>
       <ToolBar prefHeight="53.0" prefWidth="559.0">
         <items>
-          <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="57.0" text="Novo" />
+          <Button fx:id="btNew" mnemonicParsing="false" onAction="#onBtNewAction" prefHeight="29.0" prefWidth="57.0" text="Novo" />
         </items>
       </ToolBar>
-      <TableView prefHeight="319.0" prefWidth="559.0">
+      <TableView fx:id="tableViewPerson" prefHeight="319.0" prefWidth="559.0">
         <columns>
-          <TableColumn prefWidth="38.0" text="ID" />
-          <TableColumn prefWidth="154.0" text="Name" />
-            <TableColumn prefWidth="72.0" text="Nascimento" />
-            <TableColumn minWidth="0.0" prefWidth="63.0" text="Peso" />
-            <TableColumn prefWidth="48.0" text="Altura" />
+          <TableColumn fx:id="tableColumnId" prefWidth="38.0" text="ID" />
+          <TableColumn fx:id="tableColumnName" prefWidth="150.0" text="Nome" />
+            <TableColumn fx:id="tableColumnBirthDate" prefWidth="76.0" text="Nascimento" />
+            <TableColumn fx:id="tableColumnWeight" minWidth="0.0" prefWidth="63.0" text="Peso" />
+            <TableColumn fx:id="tableColumHeight" prefWidth="48.0" text="Altura" />
             <TableColumn prefWidth="75.0" />
             <TableColumn prefWidth="75.0" />
         </columns>
