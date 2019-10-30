@@ -34,7 +34,7 @@ public class MainController implements Initializable {
 	
 	@FXML
 	public void onMenuItemPersonAction() {
-		
+		loadView("/gui/PersonList.fxml");
 	}
 	
 	@FXML
