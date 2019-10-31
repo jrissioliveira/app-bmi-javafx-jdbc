@@ -4,11 +4,14 @@ import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import db.DbException;
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.Constraints;
 import gui.util.Utils;
@@ -28,6 +31,8 @@ public class PersonFormController implements Initializable{
 	private Person entity;
 	
 	private PersonService service;
+	
+	private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 	
 	@FXML
 	private TextField txtId;
@@ -70,6 +75,10 @@ public class PersonFormController implements Initializable{
 		this.service = service;
 	}
 	
+	public void subscribeDataChangeListener(DataChangeListener listener) {
+		dataChangeListeners.add(listener);
+	}
+	
 	@FXML
 	private void onBtSaveAction(ActionEvent event) {
 		if (entity == null) {
@@ -81,6 +90,7 @@ public class PersonFormController implements Initializable{
 		try {
 			entity = getFormData();
 			service.saveOrUpdate(entity);
+			notifyDataChangeListeners();
 			Utils.currentStage(event).close();
 		}
 		catch (DbException e) {
@@ -113,7 +123,7 @@ public class PersonFormController implements Initializable{
 		txtName.setText(entity.getName());
 		Locale.setDefault(Locale.US);
 		txtHeight.setText(String.format("%.2f", entity.getHeight()));
-		txtWeight.setText(String.format("%.2f", entity.getWeight()));
+		txtWeight.setText(String.format("%.3f", entity.getWeight()));
 		if (entity.getBirthDate() != null) {
 			dpBirthDate.setValue(LocalDate.ofInstant(entity.getBirthDate().toInstant(), ZoneId.systemDefault()));
 	
@@ -131,5 +141,11 @@ public class PersonFormController implements Initializable{
 		obj.setBirthDate(Date.from(instant));
 		
 		return obj;
+	}
+	
+	private void notifyDataChangeListeners() {
+		for (DataChangeListener listener : dataChangeListeners) {
+			listener.onDataChanged();
+		}
 	}
 }
