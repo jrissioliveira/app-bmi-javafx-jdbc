@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="305.0" prefWidth="574.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="305.0" prefWidth="574.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PersonFormController">
    <children>
       <GridPane layoutX="24.0" layoutY="20.0" prefHeight="260.0" prefWidth="519.0">
         <columnConstraints>
@@ -55,36 +54,36 @@
                   <Font size="14.0" />
                </font>
             </Label>
+            <TextField fx:id="txtId" GridPane.columnIndex="1" />
+            <TextField fx:id="txtName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtWeight" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtHeight" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <DatePicker fx:id="dpBirthDate" prefHeight="25.0" prefWidth="215.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" text="Salvar" />
-                  <Button mnemonicParsing="false" text="Cancelar" />
+                  <Button fx:id="btSave" mnemonicParsing="false" onAction="#onBtCancelAction" prefHeight="25.0" prefWidth="58.0" text="Salvar" />
+                  <Button fx:id="btCancel" mnemonicParsing="false" onAction="#onBtCancelAction" text="Cancelar" />
                </children>
                <padding>
                   <Insets top="10.0" />
                </padding>
             </HBox>
-            <TextField GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <DatePicker prefHeight="25.0" prefWidth="215.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label text="Label" textFill="#f20707" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Label fx:id="labelErrorName" textFill="#f20707" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <padding>
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label text="Label" textFill="#f20707" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Label fx:id="labelErrorWeight" textFill="#f20707" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <padding>
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label text="Label" textFill="#f20707" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Label fx:id="labelErrorHeight" textFill="#f20707" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <padding>
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label text="Label" textFill="#f20707" GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <Label fx:id="labelErrorBirthDate" textFill="#f20707" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <padding>
                   <Insets left="10.0" />
                </padding>

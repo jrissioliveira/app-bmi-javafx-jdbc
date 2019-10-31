@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainController">
    <content>
       <VBox prefHeight="249.0" prefWidth="486.0">
          <children>
@@ -28,12 +28,12 @@
                   </Menu>
               </menus>
             </MenuBar>
-            <Label prefHeight="123.0" prefWidth="452.0" text="          APP IMC " textFill="#0505dd">
+            <Label prefHeight="123.0" prefWidth="452.0" text="        APP IMC " textFill="#0505dd">
                <padding>
-                  <Insets left="130.0" top="100.0" />
+                  <Insets left="130.0" top="150.0" />
                </padding>
                <font>
-                  <Font name="System Bold" size="36.0" />
+                  <Font name="System Bold" size="40.0" />
                </font>
             </Label>
          </children>
