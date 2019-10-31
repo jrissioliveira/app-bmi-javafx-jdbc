@@ -30,7 +30,7 @@
           <TableColumn fx:id="tableColumnName" prefWidth="150.0" text="Nome" />
             <TableColumn fx:id="tableColumnBirthDate" prefWidth="76.0" text="Nascimento" />
             <TableColumn fx:id="tableColumnWeight" minWidth="0.0" prefWidth="63.0" text="Peso" />
-            <TableColumn fx:id="tableColumHeight" prefWidth="48.0" text="Altura" />
+            <TableColumn fx:id="tableColumnHeight" prefWidth="48.0" text="Altura" />
             <TableColumn prefWidth="75.0" />
             <TableColumn prefWidth="75.0" />
         </columns>
