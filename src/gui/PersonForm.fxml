@@ -54,14 +54,14 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="txtId" GridPane.columnIndex="1" />
+            <TextField fx:id="txtId" editable="false" GridPane.columnIndex="1" />
             <TextField fx:id="txtName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtWeight" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="txtHeight" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <DatePicker fx:id="dpBirthDate" prefHeight="25.0" prefWidth="215.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <children>
-                  <Button fx:id="btSave" mnemonicParsing="false" onAction="#onBtCancelAction" prefHeight="25.0" prefWidth="58.0" text="Salvar" />
+                  <Button fx:id="btSave" mnemonicParsing="false" onAction="#onBtSaveAction" prefHeight="25.0" prefWidth="58.0" text="Salvar" />
                   <Button fx:id="btCancel" mnemonicParsing="false" onAction="#onBtCancelAction" text="Cancelar" />
                </children>
                <padding>

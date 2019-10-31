@@ -8,7 +8,6 @@ import model.entities.Person;
 public interface BmiDao {
 	
 	void insert(Bmi obj);
-	void update(Bmi obj);
 	void delete(Bmi obj);
 	List<Bmi> findAll();
 	List<Bmi> findByPerson(Person ps);

@@ -66,37 +66,6 @@ public class BmiDaoJDBC implements BmiDao {
 	}
 
 	@Override
-	public void update(Bmi obj) {
-		PreparedStatement st = null;
-		
-		try {
-			st = conn.prepareStatement(
-					"UPDATE bmi "
-					+ "SET date = ?, bmiValue = ?, result = ?, person_id = ? "
-					+ "WHERE id = ?");
-			
-			st.setDate(1, new java.sql.Date(obj.getDate().getTime()));
-			st.setDouble(2, obj.getBmiValue());
-			st.setString(3, obj.getResult());
-			st.setInt(4, obj.getPerson().getId());
-			st.setInt(5, obj.getId());
-			
-			int rowsAffected = st.executeUpdate();
-			
-			if (rowsAffected == 0) {
-				throw new DbException("Unexpected Error! No Rows Affected!");
-			}
-			
-		}
-		catch (SQLException e) {
-			throw new DbException(e.getMessage());
-		}
-		finally {
-			DB.closeStatement(st);
-		}
-	}
-
-	@Override
 	public void delete(Bmi obj) {
 		PreparedStatement st = null;
 		

@@ -15,4 +15,13 @@ public class PersonService {
 		return list;
 	}
 	
+	public void saveOrUpdate(Person obj) {
+		if (obj.getId() == null) {
+			dao.insert(obj);
+		}
+		else {
+			dao.update(obj);
+		}
+	}
+	
 }

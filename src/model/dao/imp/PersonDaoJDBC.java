@@ -28,9 +28,9 @@ public class PersonDaoJDBC implements PersonDao {
 		try {
 			st = conn.prepareStatement(
 					"INSERT INTO person "
-					+ "(name = ?, weight = ? height =?, birthDate = ?) "
+					+ "(name, weight, height, birthDate) "
 					+ "VALUES "
-					+ "(?, ?, ?, ?", Statement.RETURN_GENERATED_KEYS);
+					+ "(?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			
 			st.setString(1, obj.getName());
 			st.setDouble(2, obj.getWeight());

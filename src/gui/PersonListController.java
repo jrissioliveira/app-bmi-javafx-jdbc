@@ -97,6 +97,7 @@ public class PersonListController implements Initializable {
 			
 			PersonFormController controller = loader.getController();
 			controller.setPerson(obj);
+			controller.setPersonService(new PersonService());
 			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
