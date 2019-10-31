@@ -26,6 +26,7 @@ public class Main extends Application {
 			mainScene = new Scene(scrollPane);
 			primaryStage.setScene(mainScene);
 			primaryStage.setTitle("BMI Calculator");
+			primaryStage.setResizable(false);
 			primaryStage.show();
 		}
 		catch(IOException e) {
