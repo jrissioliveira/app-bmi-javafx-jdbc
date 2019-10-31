@@ -149,7 +149,7 @@ public class PersonDaoJDBC implements PersonDao {
 		obj.setName(rs.getString("name"));
 		obj.setWeight(rs.getDouble("weight"));
 		obj.setHeight(rs.getDouble("height"));
-		obj.setBirthDate(new java.util.Date(rs.getDate("birthDate").getTime()));
+		obj.setBirthDate(new java.util.Date(rs.getTimestamp("birthDate").getTime()));
 		return obj;
 	}
 

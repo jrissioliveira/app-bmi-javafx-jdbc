@@ -61,7 +61,8 @@ public class PersonListController implements Initializable {
 	@FXML
 	public void onBtNewAction(ActionEvent event) {
 		Stage parentStage = Utils.currentStage(event);
-		createDialogForm("/gui/PersonForm.fxml", parentStage);
+		Person obj = new Person();
+		createDialogForm(obj, "/gui/PersonForm.fxml", parentStage);
 	}
 	
 	@Override
@@ -86,10 +87,14 @@ public class PersonListController implements Initializable {
 		tableViewPerson.setItems(obsList);
 	}
 	
-	private void createDialogForm(String absoluteName, Stage parentStage)  {
+	private void createDialogForm(Person obj, String absoluteName, Stage parentStage)  {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			Pane pane = loader.load();
+			
+			PersonFormController controller = loader.getController();
+			controller.setPerson(obj);
+			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
 			dialogStage.setTitle("Insira os dados do Usuário");
