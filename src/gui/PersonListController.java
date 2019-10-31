@@ -70,8 +70,11 @@ public class PersonListController implements Initializable {
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
 		tableColumnWeight.setCellValueFactory(new PropertyValueFactory<>("weight"));
+		Utils.formatTableColumnDouble(tableColumnWeight, 2);
 		tableColumnHeight.setCellValueFactory(new PropertyValueFactory<>("height"));
+		Utils.formatTableColumnDouble(tableColumnHeight, 2);
 		tableColumnBirthDate.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+		Utils.formatTableColumnDate(tableColumnBirthDate, "dd/MM/yyyy");
 		
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewPerson.prefHeightProperty().bind(stage.heightProperty());
