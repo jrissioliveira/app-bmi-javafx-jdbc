@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import db.DbException;
 import gui.listeners.DataChangeListener;
@@ -24,6 +26,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.entities.Person;
+import model.exceptions.ValidationException;
 import model.services.PersonService;
 
 public class PersonFormController implements Initializable{
@@ -93,6 +96,9 @@ public class PersonFormController implements Initializable{
 			notifyDataChangeListeners();
 			Utils.currentStage(event).close();
 		}
+		catch (ValidationException e) {
+			setErrorMessages(e.getErrors());
+		}
 		catch (DbException e) {
 			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
 		}
@@ -119,7 +125,7 @@ public class PersonFormController implements Initializable{
 		if (entity == null) {
 			throw new IllegalStateException("Entity was null");
 		}
-		txtId.setText(String.valueOf(entity.getId()));
+		txtId.setText(String.valueOf(entity.getId() == null ? "" : entity.getId()));
 		txtName.setText(entity.getName());
 		Locale.setDefault(Locale.US);
 		txtHeight.setText(String.format("%.2f", entity.getHeight()));
@@ -133,12 +139,36 @@ public class PersonFormController implements Initializable{
 	private Person getFormData() {
 		Person obj = new Person();
 		
+		ValidationException exception = new ValidationException("Validation error");
+		
 		obj.setId(Utils.tryParseToInt(txtId.getText()));
+		
+		if (txtName.getText() == null || txtName.getText().trim().equals("")) {
+			exception.addError("name", "Preencha o campo");
+		}
 		obj.setName(txtName.getText());
+		
+		if (txtHeight.getText() == null || txtHeight.getText().trim().equals("")) {
+			exception.addError("height", "Preencha o campo");
+		}
 		obj.setHeight(Utils.tryParseToDouble(txtHeight.getText()));
+		
+		if (txtWeight.getText() == null || txtWeight.getText().trim().equals("")) {
+			exception.addError("weight", "Preencha o campo");
+		}
 		obj.setWeight(Utils.tryParseToDouble(txtWeight.getText()));
-		Instant instant = Instant.from(dpBirthDate.getValue().atStartOfDay(ZoneId.systemDefault()));
-		obj.setBirthDate(Date.from(instant));
+		
+		if (dpBirthDate.getValue() == null) {
+			exception.addError("birthDate", "Selecione uma data");
+		}
+		else {
+			Instant instant = Instant.from(dpBirthDate.getValue().atStartOfDay(ZoneId.systemDefault()));
+			obj.setBirthDate(Date.from(instant));
+		}
+			
+		if (exception.getErrors().size() > 0) {
+			throw exception;
+		}
 		
 		return obj;
 	}
@@ -147,5 +177,15 @@ public class PersonFormController implements Initializable{
 		for (DataChangeListener listener : dataChangeListeners) {
 			listener.onDataChanged();
 		}
+	}
+	
+	public void setErrorMessages(Map<String, String> errors) {
+		Set<String> fields = errors.keySet();
+		
+		labelErrorName.setText((fields.contains("name") ? errors.get("name") : ""));
+		labelErrorHeight.setText((fields.contains("height") ? errors.get("height") : ""));
+		labelErrorWeight.setText((fields.contains("weight") ? errors.get("weight") : ""));
+		labelErrorBirthDate.setText((fields.contains("birthDate") ? errors.get("birthDate") : ""));
+
 	}
 }
