@@ -29,8 +29,7 @@ public class BmiService {
 		dao.delete(id);
 	}
 	
-	
-	public static void bmiGenerator(Person person) {
+	public Bmi bmiGenerator(Person person) {
 		double height = person.getHeight();
 		double weight = person.getWeight();
 		
@@ -55,8 +54,8 @@ public class BmiService {
 		else {
 			result = "Obesidade 3";
 		}
-		
-		person.addBmi(new Bmi(null, new Date(), bmiValue, result, person));
+	
+		return new Bmi(null, new Date(), bmiValue, result, person);
 	}
 	
 	

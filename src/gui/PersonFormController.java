@@ -83,7 +83,7 @@ public class PersonFormController implements Initializable{
 	}
 	
 	@FXML
-	private void onBtSaveAction(ActionEvent event) {
+	public void onBtSaveAction(ActionEvent event) {
 		if (entity == null) {
 			throw new IllegalStateException("Entity was null");
 		}
@@ -105,7 +105,7 @@ public class PersonFormController implements Initializable{
 	}
 	
 	@FXML
-	private void onBtCancelAction(ActionEvent event) {
+	public void onBtCancelAction(ActionEvent event) {
 		Utils.currentStage(event).close();
 	}
 
