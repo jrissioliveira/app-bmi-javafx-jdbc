@@ -2,11 +2,12 @@ package gui;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import application.Main;
 import db.DbIntegrityException;
@@ -25,6 +26,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -32,7 +36,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import model.entities.Bmi;
+import model.entities.Person;
 import model.services.BmiService;
 import model.services.PersonService;
 
@@ -40,7 +46,7 @@ public class BmiListController implements Initializable, DataChangeListener {
 
 	private BmiService service;
 	
-	private List<TableViewBmi> list = new ArrayList<>();
+	private Set<TableViewBmi> list = new HashSet<>();
 
 	@FXML
 	private TableView<TableViewBmi> tableViewBmi;
@@ -71,10 +77,18 @@ public class BmiListController implements Initializable, DataChangeListener {
 
 	@FXML
 	private TableColumn<TableViewBmi, TableViewBmi> tableColumnREMOVE;
+	
+	@FXML
+	private ComboBox<Person> comboBoxPerson;
 
 	@FXML
 	private Button btCalc;
-
+	
+	@FXML
+	private Button btClean;
+	
+	private ObservableList<Person> obsListPerson;
+	
 	private ObservableList<TableViewBmi> obsList;
 
 	public void setBmiService(BmiService service) {
@@ -84,8 +98,25 @@ public class BmiListController implements Initializable, DataChangeListener {
 	@FXML
 	public void onCalcAction(ActionEvent event) {
 		Stage parentStage = Utils.currentStage(event);
-		
 		createDialogForm("/gui/BmiForm.fxml", parentStage);
+	}
+	
+	@FXML
+	public void onCleanAction(ActionEvent event) {
+		updateTableView();
+	}
+	
+	@FXML
+	public void onComboBoxPerson() {
+		Person person = comboBoxPerson.getSelectionModel().getSelectedItem();
+		List<Bmi> listBmi = service.findByBmi(person);
+		
+		list.clear();
+		for (Bmi bmi : listBmi) {
+			list.add(new TableViewBmi(bmi));
+		}
+		obsList = FXCollections.observableArrayList(list);
+		tableViewBmi.setItems(obsList);
 	}
 
 	@Override
@@ -105,7 +136,7 @@ public class BmiListController implements Initializable, DataChangeListener {
 
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewBmi.prefHeightProperty().bind(stage.heightProperty());
-
+		initializeComboBoxPerson();
 	}
 
 	public void updateTableView() {
@@ -115,12 +146,12 @@ public class BmiListController implements Initializable, DataChangeListener {
 		
 		List<Bmi> listBmi = service.findAll();
 		
+		list.clear();
 		for (Bmi bmi : listBmi) {
 			list.add(new TableViewBmi(bmi));
 		}
 		obsList = FXCollections.observableArrayList(list);
 		tableViewBmi.setItems(obsList);
-	
 		initRemoveButtons();
 	}
 
@@ -185,6 +216,23 @@ public class BmiListController implements Initializable, DataChangeListener {
 				Alerts.showAlert("Error removing object", null, e.getMessage(), AlertType.ERROR);
 			}
 		}
+	}
+	
+	private void initializeComboBoxPerson() {
+		PersonService personService = new PersonService();
+		List<Person> list = personService.findAll();
+		obsListPerson = FXCollections.observableArrayList(list);
+		comboBoxPerson.setItems(obsListPerson);
+
+		Callback<ListView<Person>, ListCell<Person>> factory = lv -> new ListCell<Person>() {
+			@Override
+			protected void updateItem(Person item, boolean empty) {
+				super.updateItem(item, empty);
+				setText(empty ? "" : item.getName());
+			}
+		};
+		comboBoxPerson.setCellFactory(factory);
+		comboBoxPerson.setButtonCell(factory.call(null));
 	}
 
 }

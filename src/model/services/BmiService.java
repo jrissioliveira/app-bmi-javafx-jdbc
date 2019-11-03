@@ -57,7 +57,5 @@ public class BmiService {
 	
 		return new Bmi(null, new Date(), bmiValue, result, person);
 	}
-	
-	
-	
+
 }

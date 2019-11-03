@@ -117,7 +117,7 @@ public class PersonFormController implements Initializable{
 	private void initializeNodes() {
 		Constraints.setTextFieldDouble(txtHeight);
 		Constraints.setTextFieldDouble(txtWeight);
-		Constraints.setTextFieldMaxLength(txtWeight, 30);
+		Constraints.setTextFieldMaxLength(txtName, 30);
 		Utils.formatDatePicker(dpBirthDate, "dd/MM/yyyy");
 	}
 	

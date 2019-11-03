@@ -33,7 +33,7 @@ public class BmiDaoJDBC implements BmiDao {
 					"INSERT INTO bmi "
 					+ "(date, bmiValue, result, person_id) "
 					+ "VALUES "
-					+ "(?, ?, ?, ?,)", Statement.RETURN_GENERATED_KEYS);
+					+ "(?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			
 			st.setDate(1, new java.sql.Date(obj.getDate().getTime()));
 			st.setDouble(2, obj.getBmiValue());
@@ -186,7 +186,7 @@ public class BmiDaoJDBC implements BmiDao {
 		obj.setId(rs.getInt("b.id"));
 		obj.setDate(new java.util.Date(rs.getDate("b.Date").getTime()));
 		obj.setBmiValue(rs.getDouble("b.bmiValue"));
-		obj.setResult(rs.getString("b.resul"));
+		obj.setResult(rs.getString("b.result"));
 		obj.setPerson(person);
 		return obj;
 	}

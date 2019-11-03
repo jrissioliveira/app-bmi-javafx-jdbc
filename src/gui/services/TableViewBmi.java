@@ -9,7 +9,7 @@ public class TableViewBmi {
 	
 	private Integer id;
 	private String name;
-	private Long yearsOld;
+	private Integer yearsOld;
 	private Double height;
 	private Double weight;
 	private Integer bmiId;
@@ -29,10 +29,11 @@ public class TableViewBmi {
 		this.Result = bmi.getResult();
 	}
 	
-	private Long calcYearOld(Person person) {
-		long birthDate = person.getBirthDate().getTime();
-		long now = new Date().getTime();
-		return now - birthDate;
+	private Integer calcYearOld(Person person) {
+		double birthDate = person.getBirthDate().getTime();
+		double now = new Date().getTime();
+		int dif = (int) ((now - birthDate) /1000.0 /60.0 /60.0 /24.0/ 365);
+		return dif;
 	}
 
 	public Integer getId() {
@@ -51,11 +52,11 @@ public class TableViewBmi {
 		this.name = name;
 	}
 
-	public Long getYearsOld() {
+	public Integer getYearsOld() {
 		return yearsOld;
 	}
 
-	public void setYearsOld(Long yearsOld) {
+	public void setYearsOld(Integer yearsOld) {
 		this.yearsOld = yearsOld;
 	}
 

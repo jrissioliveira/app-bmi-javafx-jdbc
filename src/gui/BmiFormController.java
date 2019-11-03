@@ -3,6 +3,7 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import db.DbException;
@@ -25,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import model.entities.Bmi;
 import model.entities.Person;
+import model.exceptions.ValidationException;
 import model.services.BmiService;
 import model.services.PersonService;
 
@@ -39,6 +41,8 @@ public class BmiFormController implements Initializable{
 	private PersonService personService;
 	
 	private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
+	
+	private ValidationException exception = new ValidationException("Validation Error");
 	
 	@FXML
 	private ComboBox<Person> comboBoxPerson;
@@ -78,8 +82,13 @@ public class BmiFormController implements Initializable{
 	
 	@FXML
 	public void onBtCalcAction() {
-//		person.setHeight(Double.parseDouble(txtHeight.getText()));
-//		person.setWeight(Double.parseDouble(txtWeight.getText()));
+		if (person == null) {
+			labelErrorName.setText("Selecione um Usuário");
+			throw exception;
+		}
+		
+		person.setHeight(Double.parseDouble(txtHeight.getText()));
+		person.setWeight(Double.parseDouble(txtWeight.getText()));
 		bmi = bmiService.bmiGenerator(person);
 		txtBMI.setText(String.format("%.2f", bmi.getBmiValue()));
 		txtResult.setText(bmi.getResult());
@@ -88,10 +97,11 @@ public class BmiFormController implements Initializable{
 	@FXML
 	public void onBtSaveAction(ActionEvent event) {
 		if (bmi == null) {
-			throw new IllegalStateException("Entity was null");
+			labelErrorBMI.setText("Clique em Calcular!");
+			throw exception;
 		}
 		try {
-			bmiService = new BmiService();
+			personService.saveOrUpdate(person);
 			bmiService.save(bmi);
 			notifyDataChangeListeners();
 			Utils.currentStage(event).close();
@@ -115,13 +125,15 @@ public class BmiFormController implements Initializable{
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		Locale.setDefault(Locale.US);
+		bmiService = new BmiService();
+		personService = new PersonService();
 		initializeNodes();
 	}
 	
 	private void initializeNodes() {
 		Constraints.setTextFieldDouble(txtHeight);
 		Constraints.setTextFieldDouble(txtWeight);
-		Constraints.setTextFieldMaxLength(txtWeight, 30);
 		initializeComboBoxPerson();
 	}
 	
@@ -132,8 +144,6 @@ public class BmiFormController implements Initializable{
 	}
 	
 	private void initializeComboBoxPerson() {
-		personService = new PersonService();
-		
 		List<Person> list = personService.findAll();
 		obsList = FXCollections.observableArrayList(list);
 		comboBoxPerson.setItems(obsList);
@@ -148,5 +158,5 @@ public class BmiFormController implements Initializable{
 		comboBoxPerson.setCellFactory(factory);
 		comboBoxPerson.setButtonCell(factory.call(null));
 	}
-	
+
 }
