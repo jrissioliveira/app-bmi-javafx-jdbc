@@ -1,11 +1,34 @@
 package model.services;
 
 import java.util.Date;
+import java.util.List;
 
+import model.dao.BmiDao;
+import model.dao.DaoFactory;
 import model.entities.Bmi;
 import model.entities.Person;
 
 public class BmiService {
+	
+	BmiDao dao = DaoFactory.createBmiDao();
+	
+	public List<Bmi> findAll() {
+		List<Bmi> list = dao.findAll();
+		return list;
+	}
+	
+	public List<Bmi> findByBmi(Person ps) {
+		return dao.findByPerson(ps);
+	}
+	
+	public void save(Bmi obj) {
+		dao.insert(obj);
+	}
+	
+	public void remove(Integer id) {
+		dao.delete(id);
+	}
+	
 	
 	public static void bmiGenerator(Person person) {
 		double height = person.getHeight();
@@ -35,5 +58,7 @@ public class BmiService {
 		
 		person.addBmi(new Bmi(null, new Date(), bmiValue, result, person));
 	}
+	
+	
 	
 }

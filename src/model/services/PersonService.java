@@ -24,4 +24,8 @@ public class PersonService {
 		}
 	}
 	
+	public void remove(Person obj) {
+		dao.delete(obj);
+	}
+	
 }

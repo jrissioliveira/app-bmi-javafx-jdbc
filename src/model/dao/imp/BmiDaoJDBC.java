@@ -66,13 +66,13 @@ public class BmiDaoJDBC implements BmiDao {
 	}
 
 	@Override
-	public void delete(Bmi obj) {
+	public void delete(Integer id) {
 		PreparedStatement st = null;
 		
 		try {
 			st = conn.prepareStatement(
 					"DELETE FROM bmi WHERE id = ?");
-			st.setInt(1, obj.getId());
+			st.setInt(1, id);
 			
 			int rowsAffected = st.executeUpdate();
 			

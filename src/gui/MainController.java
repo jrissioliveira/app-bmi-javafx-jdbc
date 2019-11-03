@@ -16,6 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import model.services.BmiService;
 import model.services.PersonService;
 
 public class MainController implements Initializable {
@@ -31,7 +32,10 @@ public class MainController implements Initializable {
 
 	@FXML
 	public void onMenuItemBmiAction() {
-		
+		loadView("/gui/BmiList.fxml", (BmiListController controller) -> {
+			controller.setBmiService(new BmiService());
+			controller.updateTableView();
+		});
 	}
 	
 	@FXML
