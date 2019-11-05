@@ -31,14 +31,16 @@ public class BmiDaoJDBC implements BmiDao {
 		try {
 			st = conn.prepareStatement(
 					"INSERT INTO bmi "
-					+ "(date, bmiValue, result, person_id) "
+					+ "(date, bmiValue, result, person_id, weight, height) "
 					+ "VALUES "
-					+ "(?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+					+ "(?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			
 			st.setDate(1, new java.sql.Date(obj.getDate().getTime()));
 			st.setDouble(2, obj.getBmiValue());
 			st.setString(3, obj.getResult());
 			st.setInt(4, obj.getPerson().getId());
+			st.setDouble(5, obj.getWeight());
+			st.setDouble(6, obj.getHeight());
 			
 			int rowsAffected = st.executeUpdate();
 			
@@ -187,6 +189,8 @@ public class BmiDaoJDBC implements BmiDao {
 		obj.setDate(new java.util.Date(rs.getDate("b.Date").getTime()));
 		obj.setBmiValue(rs.getDouble("b.bmiValue"));
 		obj.setResult(rs.getString("b.result"));
+		obj.setWeight(rs.getDouble("b.weight"));
+		obj.setHeight(rs.getDouble("b.height"));
 		obj.setPerson(person);
 		return obj;
 	}

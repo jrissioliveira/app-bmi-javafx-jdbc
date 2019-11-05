@@ -55,7 +55,7 @@ public class BmiService {
 			result = "Obesidade 3";
 		}
 	
-		return new Bmi(null, new Date(), bmiValue, result, person);
+		return new Bmi(null, new Date(), bmiValue, result, person.getWeight(), person.getHeight(), person);
 	}
 
 }

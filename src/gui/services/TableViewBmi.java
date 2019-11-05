@@ -21,8 +21,8 @@ public class TableViewBmi {
 		this.id = bmi.getPerson().getId();
 		this.name = bmi.getPerson().getName();
 		this.yearsOld = calcYearOld(bmi.getPerson());
-		this.height = bmi.getPerson().getHeight();
-		this.weight = bmi.getPerson().getWeight();
+		this.height = bmi.getHeight();
+		this.weight = bmi.getWeight();
 		this.bmiId = bmi.getId();
 		this.bmiValue = bmi.getBmiValue();
 		this.date = bmi.getDate();

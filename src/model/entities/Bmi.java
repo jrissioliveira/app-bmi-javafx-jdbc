@@ -10,17 +10,22 @@ public class Bmi implements Serializable {
 	private Date date;
 	private Double bmiValue;
 	private String result;
+	private Double weight;
+	private Double height;
 	
 	private Person person;
 	
 	public Bmi() {
 	}
 
-	public Bmi(Integer id, Date date, Double bmiValue, String result, Person person) {
+	public Bmi(Integer id, Date date, Double bmiValue, String result, Double weight, Double height, Person person) {
+		super();
 		this.id = id;
 		this.date = date;
 		this.bmiValue = bmiValue;
 		this.result = result;
+		this.weight = weight;
+		this.height = height;
 		this.person = person;
 	}
 
@@ -62,6 +67,22 @@ public class Bmi implements Serializable {
 
 	public void setPerson(Person person) {
 		this.person = person;
+	}
+
+	public Double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(Double weight) {
+		this.weight = weight;
+	}
+
+	public Double getHeight() {
+		return height;
+	}
+
+	public void setHeight(Double height) {
+		this.height = height;
 	}
 
 	@Override
